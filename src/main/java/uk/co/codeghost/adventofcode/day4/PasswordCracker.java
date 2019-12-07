@@ -33,14 +33,22 @@ public class PasswordCracker {
 
         boolean twoAdjacentDigits = false;
         for (int i = 0; i < passwordString.length() - 1; i++) {
-            if (passwordString.charAt(i) == passwordString.charAt(i + 1))
+            if (passwordString.charAt(i) == passwordString.charAt(i + 1)) {
                 twoAdjacentDigits = true;
+                if (i + 2 < 6 && passwordString.charAt(i) == passwordString.charAt(i + 2)) {
+                    twoAdjacentDigits = false;
+                    i = passwordString.lastIndexOf(passwordString.charAt(i));
+                } else {
+                    // We hit a group of two, no need to check any farther for this rule.
+                    break;
+                }
+            }
         }
         if (!twoAdjacentDigits)
             return false;
 
         for (int i = 0; i < passwordString.length() - 1; i++) {
-            if(passwordString.charAt(i+1)<passwordString.charAt(i))
+            if (passwordString.charAt(i + 1) < passwordString.charAt(i))
                 return false;
         }
 
@@ -49,8 +57,8 @@ public class PasswordCracker {
 
     public List<Integer> getPossiblePasswordsInRange() {
         List<Integer> passwords = new ArrayList<>();
-        for(int i = bottomLimit; i<=topLimit; i++) {
-            if(passwordIsValid(i))
+        for (int i = bottomLimit; i <= topLimit; i++) {
+            if (passwordIsValid(i))
                 passwords.add(i);
         }
         return passwords;
