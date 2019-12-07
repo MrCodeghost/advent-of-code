@@ -14,7 +14,7 @@ public class Wire {
     public Wire(List<String> instructions) {
         gridPositions = new HashSet<>();
 
-        Position currentPosition = new Position(0, 0);
+        Position currentPosition = new Position(0, 0, 0);
         for (String instructionString : instructions) {
             Instruction instruction = Instruction.valueOf(instructionString.substring(0, 1));
             gridPositions.addAll(instruction.followInstruction(currentPosition,
@@ -28,8 +28,9 @@ public class Wire {
             @Override
             Set<Position> followInstruction(Position startingPosition, int distance) {
                 Set<Position> postitions = new HashSet<>();
+                int step = startingPosition.getStep();
                 for (int y = startingPosition.getY(); y <= (startingPosition.getY() + distance); y++) {
-                    Position newPosition = new Position(startingPosition.getX(), y);
+                    Position newPosition = new Position(startingPosition.getX(), y, step++);
                     postitions.add(newPosition);
                     currentPosition = newPosition;
                 }
@@ -40,8 +41,9 @@ public class Wire {
             @Override
             Set<Position> followInstruction(Position startingPosition, int distance) {
                 Set<Position> postitions = new HashSet<>();
+                int step = startingPosition.getStep();
                 for (int y = startingPosition.getY(); y >= (startingPosition.getY() - distance); y--) {
-                    Position newPosition = new Position(startingPosition.getX(), y);
+                    Position newPosition = new Position(startingPosition.getX(), y, step++);
                     postitions.add(newPosition);
                     currentPosition = newPosition;
                 }
@@ -52,8 +54,9 @@ public class Wire {
             @Override
             Set<Position> followInstruction(Position startingPosition, int distance) {
                 Set<Position> postitions = new HashSet<>();
+                int step = startingPosition.getStep();
                 for (int x = startingPosition.getX(); x >= (startingPosition.getX() - distance); x--) {
-                    Position newPosition = new Position(x, startingPosition.getY());
+                    Position newPosition = new Position(x, startingPosition.getY(), step++);
                     postitions.add(newPosition);
                     currentPosition = newPosition;
                 }
@@ -64,8 +67,9 @@ public class Wire {
             @Override
             Set<Position> followInstruction(Position startingPosition, int distance) {
                 Set<Position> postitions = new HashSet<>();
+                int step = startingPosition.getStep();
                 for (int x = startingPosition.getX(); x <= (startingPosition.getX() + distance); x++) {
-                    Position newPosition = new Position(x, startingPosition.getY());
+                    Position newPosition = new Position(x, startingPosition.getY(), step++);
                     postitions.add(newPosition);
                     currentPosition = newPosition;
                 }

@@ -11,6 +11,6 @@ public class Day3 {
         Grid grid = new Grid();
         grid.runWire(WIRE1);
         grid.runWire(WIRE2);
-        System.out.println(grid.getShortestDistance());
+        System.out.println(grid.getFewestSteps());
     }
 }
