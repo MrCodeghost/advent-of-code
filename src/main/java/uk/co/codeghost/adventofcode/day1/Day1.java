@@ -14,7 +14,8 @@ public class Day1 {
         try (FileInputStream fis = new FileInputStream("src/main/resources/uk.co.codeghost.adventofcode.day1/input.txt")) {
             List<Long> moduleMasses = IOUtils.readLines(fis, "UTF-8").stream().map(
                     line -> Long.valueOf(line)).collect(Collectors.toList());
-            System.out.println(new FuelCalculator().calculateForModules(moduleMasses));
+            System.out.println("Required fuel not including fuel: " + new FuelCalculator().calculateForModules(moduleMasses));
+            System.out.println("Required fuel including fuel: " + new FuelCalculator().calculateForModulesInlcudingFuel(moduleMasses));
         } catch (IOException e) {
             log.error(e.getMessage());
         }
